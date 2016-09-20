@@ -2,39 +2,37 @@ var expect    = require("chai").expect;
 var converter = require("../app/converter");
 
 var testValues = [
-					{input: null, expect: NaN}, 
-					{input: '', expect: NaN}, 
-					{input: 0, expect: NaN}, 
-					{input: 1, expect: NaN}, 
-					{input: 3, expect: NaN}, 
-					{input: 4, expect: NaN}, 
-					{input: 5, expect: NaN}, 
+					{input: null, expect: null}, 
+					{input: '', expect: null}, 
+					{input: 0, expect: null}, 
+					{input: 1, expect: null}, 
+					{input: 3, expect: null}, 
+					{input: 4, expect: null}, 
+					{input: 5, expect: null}, 
 					{input: 'I', expect: 1}, 
 					{input: 'III', expect: 3}, 
 					{input: 'IIII', expect: 4}, 
 					{input: 'IV', expect: 4}, 
 					{input: 'V', expect: 5}, 
-					{input: 1968, expect: NaN}, 
-					{input: '1473', expect: NaN}, 
-					{input: 2999, expect: NaN}, 
-					{input: 3000, expect: NaN}, 
-					{input: 10000, expect: NaN}, 
+					{input: 1968, expect: null}, 
+					{input: '1473', expect: null}, 
+					{input: 2999, expect: null}, 
+					{input: 3000, expect: null}, 
+					{input: 10000, expect: null}, 
 					{input: 'CDXXIX', expect: 429}, 
-					{input: 'CD1X', expect: NaN}, 
-					{input: 'error', expect: NaN}, 
+					{input: 'CD1X', expect: null}, 
+					{input: 'error', expect: null}, 
 					{input: 'MCDLXXXII', expect: 1482}, 
 					{input: 'MCMLXXX', expect: 1980}, 
 					{input: 'MMMMCMXCIX', expect: 4999}, 
-					{input: 'MMMMDMXCIX', expect: NaN}
+					{input: 'MMMMDMXCIX', expect: null}
 				];
 
-describe("Roman Numerals converter", function() {
+describe("Roman Numerals converter test cases...", function() {
 
 	describe("Roman to Latin conversion", function() {
-		it("converts the numerals", function() {
- 
 	 		testValues.forEach(function(test) {
-				it('correctly converts ' + test.expect, function() {
+				it('correctly converts ' + test.input + ' of type ' + typeof(test.input), function(test) {
 					try {
 						var cnv = converter.romanToLatin(test.input);
 						expect(cnv).to.equal(test.expect);
@@ -51,12 +49,16 @@ describe("Roman Numerals converter", function() {
 				});
 			});
 
-		});
 	});
 
 	describe("Latin to Roman conversion", function() {
-		it("converts the number", function() {
-
+	 	testValues.forEach(function(test) {
+	 		if(test.expect !== null) {
+				it('correctly converts ' + test.input + ' of type ' + typeof(test.input), function(test) {
+					var cnv = converter.romanToLatin(test.expect);
+					expect(cnv).to.equal(test.input);
+				});
+			}
 		});
 	});
 

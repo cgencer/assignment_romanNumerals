@@ -2,11 +2,18 @@
 // 		throw new RangeError('invalid range');
 // 		throw new SyntaxError('invalid syntax');
 
-exports.romanToLatin = function(roman) {
+exports.latinToRoman = function(romano) {
 
+	var latino;
+	if(romano.match(/(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig) === null) {
+		throw new SyntaxError('invalid value');		
+	}else{
+
+	}
+	return latino;
 };
 
-exports.latinToRoman = function(latino) {
+exports.romanToLatin = function(latino) {			// MCMXLII -> 524
 	var lookup = {
 		M: 	1000,
 		CM: 900,
@@ -25,19 +32,12 @@ exports.latinToRoman = function(latino) {
 	roman = '',
 	i;
 
-	if (type(latino) === 'string') {
+	if (typeof(latino) === 'string') {
 		throw new TypeError('value required');
-	}
-	if (type(latino) === 'number' && latino > 3999) {
+	}else if (typeof(latino) === 'number' && latino > 3999) {
 		throw new RangeError('invalid range');
-	}
-	if (type(latino) === 'object') {
+	}else if (typeof(latino) === 'object') {
 		throw new SyntaxError('invalid value');
-	}
-
-	var matches = latino.match(/(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig);
-	if(matches === null) {
-		throw new SyntaxError('invalid value');		
 	}else{
 		for ( i in lookup ) {
 			while ( latino >= lookup[i] ) {
