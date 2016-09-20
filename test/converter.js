@@ -34,7 +34,7 @@ describe("Roman Numerals converter test cases...", function() {
 	 		testValues.forEach(function(test) {
 				it('correctly converts ' + test.input + ' of type ' + typeof(test.input), function(test) {
 					try {
-						var cnv = converter.romanToLatin(test.input);
+						var cnv = converter.latinToRoman(test.input);
 						expect(cnv).to.equal(test.expect);
 					} catch (e) {
 						if (e instanceof TypeError) {

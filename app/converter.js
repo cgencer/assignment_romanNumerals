@@ -5,10 +5,17 @@
 exports.latinToRoman = function(romano) {
 
 	var latino;
-	if(romano.match(/(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig) === null) {
+	if (romano === '' || typeof(romano) === 'object') {
+		console.log('error!');
+		throw new TypeError('value required');
+	}else if (typeof(romano) === 'number' && romano > 3999) {
+		throw new RangeError('invalid range');
+	}else if (typeof(romano) === 'object') {
+		throw new SyntaxError('invalid value');
+	}else if(romano.match(/(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig) === null) {
 		throw new SyntaxError('invalid value');		
 	}else{
-
+		// convert it here...
 	}
 	return latino;
 };
