@@ -30,11 +30,22 @@ var testValues = [
 describe("Roman Numerals converter", function() {
   describe("Roman to Latin conversion", function() {
     it("converts the numerals", function() {
+ 
+ 		testValues.forEach(function(test) {
+			it('correctly converts ' + test.expect, function() {
+				try {
+					var cnv = converter.romanToLatin(test.input);
+					expect(cnv).to.equal(test.expect);
+				} catch (e) {
+					if (e instanceof TypeError) {
+						// statements to handle TypeError exceptions
+					} else if (e instanceof RangeError) {
+						// statements to handle RangeError exceptions
+					} else if (e instanceof EvalError) {
+						// statements to handle EvalError exceptions
+					}
+				}
 
-		testValues.forEach(function(test) {
-			it('correctly converts ' + test, function() {
-		      var cnv = converter.romanToLatin(test);
-		      expect(cnv).to.equal("ff0000");
 			});
 		});
 
