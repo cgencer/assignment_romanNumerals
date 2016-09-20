@@ -1,0 +1,25 @@
+{
+  "name": "roman-numerals",
+  "version": "0.0.1",
+  "description": "a node.js module for conversion of roman numerals",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "keywords": [
+    "roman",
+    "numerals",
+    "number",
+    "systems",
+    "decimal",
+    "node.js",
+    "module"
+  ],
+  "author": "Cem Gencer",
+  "license": "ISC",
+  "dev-dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.6"
+  }
+}
