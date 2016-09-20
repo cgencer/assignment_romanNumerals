@@ -1,6 +1,6 @@
-// 		throw new Error('value required');
-// 		throw new Error('invalid range');
-// 		throw new Error('invalid value');
+// 		throw new TypeError('value required');
+// 		throw new RangeError('invalid range');
+// 		throw new SyntaxError('invalid syntax');
 
 exports.romanToLatin = function(red, green, blue) {
 
