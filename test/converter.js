@@ -1,13 +1,42 @@
 var expect    = require("chai").expect;
 var converter = require("../app/converter");
 
-var testValues = [null, ‘’, 0, 1, 3, 4, 5, ‘I’, ‘III’, ‘IIII’, ‘IV’, ‘V’, 
-					1968, ‘1473’, 2999, 3000, 10000, ‘CDXXIX’, ‘CD1X’, 
-					‘error’, ‘MCDLXXXII’, ‘MCMLXXX’, ‘MMMMCMXCIX’, ‘MMMMDMXCIX’];
+var testValues = [
+					{input: null, expect: NaN}, 
+					{input: ‘’, expect: NaN}, 
+					{input: 0, expect: NaN}, 
+					{input: 1, expect: NaN}, 
+					{input: 3, expect: NaN}, 
+					{input: 4, expect: NaN}, 
+					{input: 5, expect: NaN}, 
+					{input: ‘I’, expect: 1}, 
+					{input: ‘III’, expect: 3}, 
+					{input: ‘IIII’, expect: 4}, 
+					{input: ‘IV’, expect: 4}, 
+					{input: ‘V’, expect: 5}, 
+					{input: 1968, expect: NaN}, 
+					{input: ‘1473’, expect: NaN}, 
+					{input: 2999, expect: NaN}, 
+					{input: 3000, expect: NaN}, 
+					{input: 10000, expect: NaN}, 
+					{input: ‘CDXXIX’, expect: }, 
+					{input: ‘CD1X’, expect: }, 
+					{input: ‘error’, expect: NaN}, 
+					{input: ‘MCDLXXXII’, expect: }, 
+					{input: ‘MCMLXXX’, expect: }, 
+					{input: ‘MMMMCMXCIX’, expect: }, 
+					{input: ‘MMMMDMXCIX’, expect: }];
 
 describe("Roman Numerals converter", function() {
   describe("Roman to Latin conversion", function() {
     it("converts the numerals", function() {
+
+		testValues.forEach(function(test) {
+			it('correctly converts ' + test, function() {
+		      var cnv = converter.romanToLatin(test);
+		      expect(cnv).to.equal("ff0000");
+			});
+		});
 
     });
   });
