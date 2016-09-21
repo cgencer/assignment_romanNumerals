@@ -2,6 +2,8 @@ var expect    	= require("chai").expect;
 var assert		= require('chai').assert;
 var converter 	= require("../app/converter");
 var regEx = /(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig;
+
+var regEx = /(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})/ig;
 var testValues = [
 	{input: null, 			expected: null}, 
 	{input: '', 			expected: null}, 
@@ -34,11 +36,26 @@ describe("Roman Numerals converter tests...", function() {
 	describe("Roman to Latin conversion", function() {
 
 	 	testValues.forEach( function(test) {
-			it('trying to convert ' + test.input + ' of type ' + typeof(test.input) + ' into Latin', function(done) {
+			it('trying to convert ' + test.input + ' (='+test.expected+') of type ' + typeof(test.input) + ' into Latin', function(done) {
 
-				expect( test.input )
+				try {
+
+					expect( test.input )
 						.to.be.a('string')
 						.to.match(regEx);
+
+				} catch(e) {
+/*
+					if (e instanceof SyntaxError) {
+						console.log('\tinvalid value.');
+					}else if(e instanceof RangeError) {
+						console.log('\tinvalid range.');
+					}else{
+//						console.log('other error: ' + e.message);
+						console.log('\tTest R2L: couldnt determine the roman numerals trough regexp');
+					}
+*/
+				}				
 
 				expect( converter.romanToLatin( test.input ) )
 						.to.be.a('number')
@@ -59,8 +76,22 @@ describe("Roman Numerals converter tests...", function() {
 							.to.be.a('number')
 							.to.be.within(1, 3999);
 
-					expect( converter.latinToRoman(test.expected) )
-						.to.match(regEx);
+					try {
+						expect( converter.latinToRoman(test.expected) )
+							.to.be.a('string')
+							.to.match(regEx);
+					} catch(e) {
+
+						if (e instanceof SyntaxError) {
+							console.log('\tinvalid value.');
+						}else if(e instanceof RangeError) {
+							console.log('\tinvalid range.');
+						}else{
+//							console.log('other error: ' + e.message);
+							console.log('\tTest L2R: couldnt determine the roman numerals \''+test.input+'\' trough regexp \n\t('+e+')')
+						}
+					}
+
 
 					done();
 				});

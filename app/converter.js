@@ -21,8 +21,12 @@ exports.latinToRoman = function(latino) {
 exports.romanToLatin = function(romano) {			// MCMXLII -> 524
 	var i, regEx = /(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig;
 
-  	if (typeof(romano) === 'number' && isNumber(romano)) {
+	var regEx = /(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})/ig;
+  	if (typeof(romano) === 'number' && Number.isInteger(romano)) {
 		throw new RangeError('invalid range');
+
+  	}else if (typeof(romano) === 'number' && romano > 0 && romano < 4000) {
+		throw new RangeError('is already a latin number');
 
 	}else if (typeof(romano) === 'object') {
 		throw new SyntaxError('invalid value');
@@ -30,11 +34,11 @@ exports.romanToLatin = function(romano) {			// MCMXLII -> 524
 	}
 
 	if(typeof(romano) === 'string') {
-		if(romano === '') {a
-			throw new SyntaxError('value not present');
+		if('undefined' === typeof romano || '' === romano || null === romano || undefined === romano) {
+			throw new SyntaxError('value required');
 
-		}else if(romano.match(regEx).length !== 1) {
-			throw new SyntaxError('invalid value');
+		}else if(romano.match(regEx) === null ) {
+			throw new SyntaxError('\tApp: couldnt determine the roman numerals \''+romano+'\' trough regexp');
 	
 		}else{
 			var result = 0;
