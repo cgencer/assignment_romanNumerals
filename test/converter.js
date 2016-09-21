@@ -29,11 +29,26 @@ var testValues = [
 	{input: 'MMMMDMXCIX', 	expected: null}
 ];
 
-describe("Roman Numerals converter test cases...", function() {
+describe("Roman Numerals converter tests...", function() {
 
 	describe("Roman to Latin conversion", function() {
 
+	 	testValues.forEach( function(test) {
+			it('trying to convert ' + test.input + ' of type ' + typeof(test.input) + ' into Latin', function(done) {
+
+				expect( test.input )
+						.to.be.a('string')
+						.to.match(regEx);
+
+				expect( converter.romanToLatin( test.input ) )
+						.to.be.a('number')
+						.to.be.within(1, 3999);
+
+				done();
+			});
+		});
 	});
+
 
 	describe("Latin to Roman conversion", function() {
 	 	testValues.forEach(function(test) {
@@ -52,5 +67,6 @@ describe("Roman Numerals converter test cases...", function() {
 			}
 		});
 	});
+
 
 });

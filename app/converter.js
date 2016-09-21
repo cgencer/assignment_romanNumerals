@@ -1,4 +1,3 @@
-
 exports.latinToRoman = function(latino) {
 
 	var romano = '';
@@ -17,7 +16,6 @@ exports.latinToRoman = function(latino) {
 	}else{
 		throw new SyntaxError('invalid value');
 	}
-
 };
 
 exports.romanToLatin = function(romano) {			// MCMXLII -> 524
@@ -39,8 +37,21 @@ exports.romanToLatin = function(romano) {			// MCMXLII -> 524
 			throw new SyntaxError('invalid value');
 	
 		}else{
+			var result = 0;
+			var oRomano = romano;
+			var decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1],
+			roman = ["M", "MC","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"];
 
-			// do the conversion...
+			for (var i = 0; i<=decimal.length; i++) {
+				while (romano.indexOf(roman[i]) === 0) {
+					result += decimal[i];
+					romano = romano.replace(roman[i], '');
+				}
+			}
+			if (result < 1 || result > 3999) {
+				throw new RangeError('invalid range');
+			}
+			return result;
 		}
 	}
 
