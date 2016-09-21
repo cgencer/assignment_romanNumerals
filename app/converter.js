@@ -8,6 +8,10 @@ exports.latinToRoman = function(latino) {
 	if(Number.isInteger(latino)) {
 
 		for (var i = 0; i <= decimal.length; i++) {
+			while (latino%decimal[i] < latino) {   
+				romano += roman[i];
+				latino -= decimal[i];
+			}
 		}
 		return romano;
 	}else{
@@ -16,38 +20,28 @@ exports.latinToRoman = function(latino) {
 
 };
 
-exports.romanToLatin = function(latino) {			// MCMXLII -> 524
-	var lookup = {
-		M: 	1000,
-		CM: 900,
-		D: 	500,
-		CD: 400,
-		C: 	100,
-		XC: 90,
-		L: 	50,
-		XL: 40,
-		X: 	10,
-		IX: 9,
-		V: 	5,
-		IV: 4,
-		I: 	1
-	},
-	roman = '',
-	i;
+exports.romanToLatin = function(romano) {			// MCMXLII -> 524
+	var i, regEx = /(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig;
 
-	if (typeof(latino) === 'string') {
-		throw new TypeError('value required');
-	}else if (typeof(latino) === 'number' && latino > 3999) {
+  	if (typeof(romano) === 'number' && isNumber(romano)) {
 		throw new RangeError('invalid range');
-	}else if (typeof(latino) === 'object') {
+
+	}else if (typeof(romano) === 'object') {
 		throw new SyntaxError('invalid value');
-	}else{
-		for ( i in lookup ) {
-			while ( latino >= lookup[i] ) {
-				roman += i;
-				latino -= lookup[i];
-			}
-		}
-		return roman;
+
 	}
+
+	if(typeof(romano) === 'string') {
+		if(romano === '') {a
+			throw new SyntaxError('value not present');
+
+		}else if(romano.match(regEx).length !== 1) {
+			throw new SyntaxError('invalid value');
+	
+		}else{
+
+			// do the conversion...
+		}
+	}
+
 };
