@@ -1,23 +1,19 @@
-// 		throw new TypeError('value required');
-// 		throw new RangeError('invalid range');
-// 		throw new SyntaxError('invalid syntax');
 
-exports.latinToRoman = function(romano) {
+exports.latinToRoman = function(latino) {
 
-	var latino;
-	if (romano === '' || typeof(romano) === 'object') {
-		console.log('error!');
-		throw new TypeError('value required');
-	}else if (typeof(romano) === 'number' && romano > 3999) {
-		throw new RangeError('invalid range');
-	}else if (typeof(romano) === 'object') {
-		throw new SyntaxError('invalid value');
-	}else if(romano.match(/(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)/ig) === null) {
-		throw new SyntaxError('invalid value');		
+	var romano = '';
+	var decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1],
+	roman = ["M", "MC","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"];
+
+	if(Number.isInteger(latino)) {
+
+		for (var i = 0; i <= decimal.length; i++) {
+		}
+		return romano;
 	}else{
-		// convert it here...
+		throw new SyntaxError('invalid value');
 	}
-	return latino;
+
 };
 
 exports.romanToLatin = function(latino) {			// MCMXLII -> 524
